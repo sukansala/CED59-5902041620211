@@ -1,13 +1,17 @@
 from flask import Flask
 from flask import render_template
 
-
 app = Flask(__name__)
 
 
 @app.route("/")
-def index():  # โมดูลรับค่าจากไฟล์ index.html โดยการส่งค่าในรูปแบบ POST
+def index():
     return render_template('index.html')
+
+
+@app.route('/', methods=["post"])
+def register():
+    return 'xyz'
 
 
 if __name__ == '__main__':
