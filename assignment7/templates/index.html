@@ -6,11 +6,15 @@
 </head>
 <body>
 <form action ="/"  method="POST">
-        <p>Name<input type = "text" name = "Name"  required="required" /></p>
-        <p>Surname<input type = "text" surname = "surname" required="required" /></p>
-        <p>User<input type = "text" user = "User" required="required"/></p>
-        <p>Email<input type = "email" email = "Email" required="required" id="email" pattern=".+@gmail.com" /></p>
-        <p>Password<input type = "password" pass = "password" id="password" minlength="8"  /></p>
+    {{ form.csrf_token }}
+    {{ form.hidden_tag() }}
+    {{ form.name.label }} {{ form.name(size=20) }}
+
+        <p>Name<input type = "text" name = "Name"  required="required" /></p><br />
+        <p>Surname<input type = "text" surname = "surname" required="required" /></p><br />
+        <p>User<input type = "text" user = "User" required="required"/></p><br />
+        <p>Email<input type = "email" email = "Email" required="required" id="email" pattern=".+@gmail.com" /></p><br />
+        <p>Password<input type = "password" pass = "password" id="password" minlength="8"  /></p><br />
         <p><input type = "submit" value = "submit" /></p>
 </form>
 </body>
