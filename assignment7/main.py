@@ -1,30 +1,33 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from wtforms import StringField, PasswordField
 from flask_wtf import FlaskForm
-from wtforms import StringField
-from wtforms.validators import DataRequired
+from wtforms.validators import InputRequired, Length, Email
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'any secret string'
 
 
-class MyForm(FlaskForm):
-    name = StringField('name', validators=[DataRequired()])
+class Form(FlaskForm):
+    fname = StringField("fname", validators=[InputRequired()])
+    lname = StringField("lanme", validators=[InputRequired()])
+    email = StringField("email", [InputRequired(""), Email("Please enter email is ______@gmail.com")])
+    username = StringField("username", validators=[InputRequired()])
+    password = PasswordField("password",
+                             validators=[InputRequired(), Length(min=8, message="Please enter password as size")])
 
 
-@app.route("/")
-def index():
-    return render_template('index.html')
+@app.route('/')
+def SingUp():
+    form = Form()
+    return render_template('index.html', form=form)
 
 
-#@app.route('/', methods=["post"])
-#def register():
-#    return 'xyz'
-
-
-@app.route('/', methods=('GET', 'POST'))
-def submit():
-    form = MyForm()
+@app.route('/register', methods=["post"])
+def register():
+    username = request.form['username']
+    form = Form()
     if form.validate_on_submit():
-        return redirect('/success')
+        return "Index Page!! Welcome your are " + username
     return render_template('index.html', form=form)
 
 
