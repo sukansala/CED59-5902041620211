@@ -1,1 +1,2 @@
-Sukan Sarlaring
+<b>Index Action</b>
+<?=$data?>
