@@ -8,9 +8,18 @@ class Subject extends \common\models\Subject
 {
     public function behaviors()
     {
-        return [
+        return 
+        [
             TimestampBehavior::class,
             BlameableBehavior::class
+        ];
+    }
+
+    public function rules() 
+    {
+        return[
+            ['name', 'required', 'message' => 'Please fill data.'],
+            ['name', 'email', 'message' => 'Please type email.']
         ];
     }
 }
